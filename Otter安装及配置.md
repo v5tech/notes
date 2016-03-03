@@ -241,4 +241,51 @@ ubuntu@s2:~/apps/node$ echo 2 > conf/nid
 ubuntu@s2:~/apps/node$ bin/startup.sh
 ```
 
+### 18、Otter双向同步
+
+Otter双向同步可表现为`双向同步`和`双A同步`。
+
+#### 18.1 双向同步
+
+可以理解为两个单项同步的组合。需要在做双向同步的数据库上初始化所需的系统表。
+
+具体操作：
+
+##### 18.1.1、导入系统表
+
+在s1、s2上的mysql数据库中导入otter-system-ddl-mysql.sql
+
+https://raw.github.com/alibaba/otter/MASTER/node/deployer/src/main/resources/SQL/otter-system-ddl-mysql.sql
+
+##### 18.1.2、配置一个Channel
+
+##### 18.1.3、在一个Channel中配置两个Pipeline
+
+*注意：两个单向的Canal和映射配置，在一个Channel下配置两个Pipeline。如果是两个Channel，每个Channel对应一个Pipeline，将不会使用双向回环控制算法，会有重复回环同步。推荐在在一个Channel下配置两个Pipeline这种方式。*
+
+*每个Pipeline各自配置Canal，定义映射关系*
+
+接下来的Channel、Canal、Pipeline及映射关系和单向配置一致。
+
+
+#### 18.2 双A同步
+
+相对于双向同步主要区别是双A会在两地修改同一条记录。而双向同步只是两地数据的互相同步，两地修改的数据内容无交集。
+
+双A同步相对于双向同步，整个配置主要是一些参数上有些变化。
+
+##### 18.2.1、导入系统表
+
+在s1、s2上的mysql数据库中导入otter-system-ddl-mysql.sql
+
+https://raw.github.com/alibaba/otter/MASTER/node/deployer/src/main/resources/SQL/otter-system-ddl-mysql.sql
+
+##### 18.2.2、配置一个Channel
+
+##### 18.2.3、在一个Channel中配置两个Pipeline
+
+*注意：除了需要定义一个主站点外，需要在高级设置中将一个Pipeline的“支持DDL”设置为false，另一个设置为true，否则将提示“一个channel中只允许开启单向ddl同步!”错误*
+
+*每个Pipeline各自配置Canal，定义映射关系*
+
 https://github.com/alibaba/otter/wiki/Adminguide
