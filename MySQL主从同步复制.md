@@ -1,7 +1,10 @@
 > Ubuntu 12.04.5
-  MySQL 5.5.47
-  master 192.168.64.131
-  slave 192.168.64.132
+
+> MySQL 5.5.47
+
+> master 192.168.64.131
+
+> slave 192.168.64.132
 
 #### 修改master上mysql配置文件
 
