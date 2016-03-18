@@ -1,14 +1,14 @@
-# ÔÚCentOS7ÉÏ´î½¨MariaDB Galera Cluster
+# åœ¨CentOS7ä¸Šæ­å»ºMariaDB Galera Cluster
 
-> »·¾³:
+> ç¯å¢ƒ:
 
 > MariaDB 10.1.12
 
 > CentOS Linux release 7.2.1511
 
-### °²×°MariaDB 10.1.12
+### å®‰è£…MariaDB 10.1.12
 
-ÅäÖÃMariaDB 10.1.12 yumÔ´
+é…ç½®MariaDB 10.1.12 yumæº
 
 ```bash
 [root@c1 ~]# vim /etc/yum.repos.d/MariaDB.repo
@@ -16,7 +16,7 @@
 [root@c3 ~]# vim /etc/yum.repos.d/MariaDB.repo
 
 ```
-ÆäMariaDB.repoÎÄ¼şÄÚÈİÈçÏÂ
+å…¶MariaDB.repoæ–‡ä»¶å†…å®¹å¦‚ä¸‹
 ```
 [mariadb]
 name = MariaDB
@@ -25,15 +25,15 @@ gpgkey=https://yum.mariadb.org/RPM-GPG-KEY-MariaDB
 gpgcheck=1
 ```
 
-Ê¹ÓÃyum°²×°
+ä½¿ç”¨yumå®‰è£…
 
 ```
-[root@c1 ~]# sudo yum install MariaDB-Galera-server MariaDB-client galera
-[root@c2 ~]# sudo yum install MariaDB-Galera-server MariaDB-client galera
-[root@c3 ~]# sudo yum install MariaDB-Galera-server MariaDB-client galera
+[root@c1 ~]# sudo yum install MariaDB-server MariaDB-client galera
+[root@c2 ~]# sudo yum install MariaDB-server MariaDB-client galera
+[root@c3 ~]# sudo yum install MariaDB-server MariaDB-client galera
 ```
 
-°²È«ÅäÖÃ
+å®‰å…¨é…ç½®
 
 ```bash
 [root@c1 ~]# /usr/bin/mysql_secure_installation
@@ -41,21 +41,21 @@ gpgcheck=1
 [root@c3 ~]# /usr/bin/mysql_secure_installation
 ```
 
-Æô¶¯MariaDB
+å¯åŠ¨MariaDB
 
 ```bash
 sudo systemctl start mariadb
 ```
-»ò
+æˆ–
 ```bash
 sudo /etc/init.d/mysql start
 ```
 
-### ÅäÖÃ MariaDB Galera Cluster
+### é…ç½® MariaDB Galera Cluster
 
-·Ö±ğĞŞ¸ÄÈıÌ¨½ÚµãÉÏµÄ`/etc/my.cnf.d/server.cnf`ÎÄ¼ş
+åˆ†åˆ«ä¿®æ”¹ä¸‰å°èŠ‚ç‚¹ä¸Šçš„`/etc/my.cnf.d/server.cnf`æ–‡ä»¶
 
-ĞŞ¸Äc1ÉÏµÄ`/etc/my.cnf.d/server.cnf`ÎÄ¼şÈçÏÂ
+ä¿®æ”¹c1ä¸Šçš„`/etc/my.cnf.d/server.cnf`æ–‡ä»¶å¦‚ä¸‹
 
 ```
 [server]
@@ -84,7 +84,7 @@ wsrep_sst_method=rsync
 [mariadb-10.1]
 ```
 
-ĞŞ¸Äc2ÉÏµÄ`/etc/my.cnf.d/server.cnf`ÎÄ¼şÈçÏÂ
+ä¿®æ”¹c2ä¸Šçš„`/etc/my.cnf.d/server.cnf`æ–‡ä»¶å¦‚ä¸‹
 
 ```
 [server]
@@ -113,7 +113,7 @@ wsrep_sst_method=rsync
 [mariadb-10.1]
 ```
 
-ĞŞ¸Äc3ÉÏµÄ`/etc/my.cnf.d/server.cnf`ÎÄ¼şÈçÏÂ
+ä¿®æ”¹c3ä¸Šçš„`/etc/my.cnf.d/server.cnf`æ–‡ä»¶å¦‚ä¸‹
 
 ```
 [server]
@@ -142,13 +142,13 @@ wsrep_sst_method=rsync
 [mariadb-10.1]
 ```
 
-### Æô¶¯¼¯Èº
+### å¯åŠ¨é›†ç¾¤
 
-Òıµ¼´´½¨¼¯Èº
+å¼•å¯¼åˆ›å»ºé›†ç¾¤
 ```bash
 [root@c1 ~]# /usr/sbin/mysqld --wsrep-new-cluster --user=root &
 ```
-²é¿´¼¯ÈºĞÅÏ¢
+æŸ¥çœ‹é›†ç¾¤ä¿¡æ¯
 ```
 [root@c1 ~]# mysql -uroot -proot
 Welcome to the MariaDB monitor.  Commands end with ; or \g.
@@ -231,12 +231,12 @@ MariaDB [(none)]> SHOW STATUS LIKE 'wsrep_%';
 57 rows in set (0.00 sec)
 
 ```
-Ïò¼¯ÈºÖĞÌí¼ÓÆäËû½Úµã
+å‘é›†ç¾¤ä¸­æ·»åŠ å…¶ä»–èŠ‚ç‚¹
 ```bash
 [root@c2 ~]# systemctl start mariadb
 [root@c3 ~]# systemctl start mariadb
 ```
-²é¿´¼¯ÈºĞÅÏ¢
+æŸ¥çœ‹é›†ç¾¤ä¿¡æ¯
 ```
 [root@c1 ~]# mysql -uroot -proot
 Welcome to the MariaDB monitor.  Commands end with ; or \g.
@@ -321,9 +321,9 @@ MariaDB [(none)]> SHOW STATUS LIKE 'wsrep_%';
 
 ```
 
-### ²âÊÔÊı¾İÍ¬²½
+### æµ‹è¯•æ•°æ®åŒæ­¥
 
-ÔÚc1ÉÏ½¨¿â¡¢½¨±í²¢²åÈëÊı¾İ£¬¹Û²ìc2¡¢c3ÊÇ·ñ¿ÉÒÔ²éÑ¯µ½
+åœ¨c1ä¸Šå»ºåº“ã€å»ºè¡¨å¹¶æ’å…¥æ•°æ®ï¼Œè§‚å¯Ÿc2ã€c3æ˜¯å¦å¯ä»¥æŸ¥è¯¢åˆ°
 
 ```
 MariaDB [galeratest]> CREATE DATABASE galera;
@@ -363,7 +363,7 @@ MariaDB [galera]> select * from t;
 +----+
 6 rows in set (0.00 sec)
 ```
-ÔÚc2¡¢c3ÉÏ²éÑ¯Êı¾İ
+åœ¨c2ã€c3ä¸ŠæŸ¥è¯¢æ•°æ®
 
 ```
 MariaDB [(none)]> show databases;
@@ -396,7 +396,7 @@ MariaDB [galera]> SELECT * FROM t;
 6 rows in set (0.00 sec)
 ```
 
-### ¹ÊÕÏ²âÊÔ
+### æ•…éšœæµ‹è¯•
 
 ```bash
 [root@c3 ~]# systemctl stop mariadb
@@ -482,16 +482,18 @@ MariaDB [galera]> SHOW STATUS LIKE 'wsrep_%';
 +------------------------------+-----------------------------------------+
 57 rows in set (0.00 sec)
 ```
-¹Û²ì`wsrep_cluster_size`£¬`wsrep_incoming_addresses`µÄÖµ
+è§‚å¯Ÿ`wsrep_cluster_size`ï¼Œ`wsrep_incoming_addresses`çš„å€¼
 
-### ²Î¿¼ÎÄµµ
+### å‚è€ƒæ–‡æ¡£
 
-https://www.vultr.com/docs/install-mariadb-on-centos-7
+[https://www.vultr.com/docs/install-mariadb-on-centos-7](https://www.vultr.com/docs/install-mariadb-on-centos-7)
 
-https://mariadb.com/kb/en/mariadb/yum/#installing-mariadb-galera-cluster-with-yum
+[https://downloads.mariadb.org/mariadb/repositories/#mirror=digitalocean-nyc&distro=CentOS&distro_release=centos7-amd64--centos7&version=10.1](https://downloads.mariadb.org/mariadb/repositories/#mirror=digitalocean-nyc&distro=CentOS&distro_release=centos7-amd64--centos7&version=10.1)
 
-https://mariadb.com/kb/en/mariadb/getting-started-with-mariadb-galera-cluster/
+[https://mariadb.com/kb/en/mariadb/yum/#installing-mariadb-galera-cluster-with-yum](https://mariadb.com/kb/en/mariadb/yum/#installing-mariadb-galera-cluster-with-yum)
 
-http://galeracluster.com/documentation-webpages/configuration.html
+[https://mariadb.com/kb/en/mariadb/getting-started-with-mariadb-galera-cluster/](https://mariadb.com/kb/en/mariadb/getting-started-with-mariadb-galera-cluster/)
 
-http://www.nnbbxx.net/post-3817.html
+[http://galeracluster.com/documentation-webpages/configuration.html](http://galeracluster.com/documentation-webpages/configuration.html)
+
+[http://www.nnbbxx.net/post-3817.html](http://www.nnbbxx.net/post-3817.html)
