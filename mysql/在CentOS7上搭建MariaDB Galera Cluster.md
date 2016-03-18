@@ -496,4 +496,6 @@ MariaDB [galera]> SHOW STATUS LIKE 'wsrep_%';
 
 [http://galeracluster.com/documentation-webpages/configuration.html](http://galeracluster.com/documentation-webpages/configuration.html)
 
+[http://www.sebastien-han.fr/blog/2012/04/01/mysql-multi-master-replication-with-galera/](http://www.sebastien-han.fr/blog/2012/04/01/mysql-multi-master-replication-with-galera/)
+
 [http://www.nnbbxx.net/post-3817.html](http://www.nnbbxx.net/post-3817.html)
