@@ -1,22 +1,24 @@
-# 1. 安装Redis
+# Windows平台安装Redis集群（基于Redis 3.0.5）
+
+### 1. 安装Redis
 
 https://github.com/MSOpenTech/redis/releases/download/win-3.0.501/Redis-x64-3.0.501.msi
 
 这里将Redis安装在`C:\Redis`目录下。
 
-# 2. 安装Ruby
+### 2. 安装Ruby
 
 http://dl.bintray.com/oneclick/rubyinstaller/rubyinstaller-2.2.4-x64.exe
 
 这里将Ruby安装在`C:\Ruby22-x64`目录下。
 
-# 3. 安装Redis的Ruby库
+### 3. 安装Redis的Ruby库
 
 ```ruby
 gem install redis
 ```
 
-# 4. 配置Redis Node
+### 4. 配置Redis Node
 
 拷贝6份Redis安装目录下的`redis.windows-service.conf`文件依次重命名为redis.6380.conf、redis.6381.conf、redis.6382.conf、redis.6383.conf、redis.6384.conf、redis.6385.conf。并分别修改这6个配置文件。具体修改内容如下:
 
@@ -106,7 +108,7 @@ cluster-require-full-coverage yes
 
 至此集群节点配置文件配置完毕。
 
-# 5. 注册Redis为Windows Service
+### 5. 注册Redis为Windows Service
 
 在服务中停掉Redis默认安装时已经注册到端口号为6379的服务。
 
@@ -130,9 +132,9 @@ redis-server --service-install redis.6385.conf --service-name redis6385
 redis-server --service-start --service-name Redis6385
 ```
 
-# 6. 创建Redis Cluster
+### 6. 创建Redis Cluster
 
-下载https://raw.githubusercontent.com/MSOpenTech/redis/3.0/src/redis-trib.rb脚本到Redis安装目录(C:\Redis)，在命令行执行如下命令:
+下载[https://raw.githubusercontent.com/MSOpenTech/redis/3.0/src/redis-trib.rb](https://raw.githubusercontent.com/MSOpenTech/redis/3.0/src/redis-trib.rb)脚本到Redis安装目录(C:\Redis)，在命令行执行如下命令:
 
 ```
 C:\Redis>redis-trib.rb create --replicas 1 127.0.0.1:6380 127.0.0.1:6381 127.0.0.1:6382 127.0.0.1:6383 127.0.0.1:6384 127.0.0.1:6385
@@ -194,9 +196,8 @@ C:\Redis>
 
 到此Redis Cluster创建完毕，从控制台输出可以看到：`127.0.0.1:6380`，`127.0.0.1:6381`，`127.0.0.1:6382`为master节点。`127.0.0.1:6383`，`127.0.0.1:6384`，`127.0.0.1:6385`依次为相对应的副节点。
 
-# 参考文档
+### 参考文档
 
-在Windows上安裝 Redis Cluster
-https://dotblogs.com.tw/supershowwei/2015/12/29/101928
-Redis集群研究和实践（基于redis 3.0.5）
-https://www.zybuluo.com/phper/note/195558 
+[https://dotblogs.com.tw/supershowwei/2015/12/29/101928](https://dotblogs.com.tw/supershowwei/2015/12/29/101928 "在Windows上安裝 Redis Cluster")
+
+[https://www.zybuluo.com/phper/note/195558](https://www.zybuluo.com/phper/note/195558 "Redis集群研究和实践（基于redis 3.0.5）")
