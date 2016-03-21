@@ -1,13 +1,13 @@
 > 环境说明
 
-> ubuntu 12.04
-
-> s1 192.168.64.128 zookeeper manager node mysql
-
-> s2 192.168.64.129 zookeeper node mysql
-
-> s3 192.168.64.130 zookeeper
-
+soft|s1(192.168.64.128)|s2(192.168.64.129)|s3(192.168.64.130)
+---|---|---|---
+ubuntu 12.04|s1|s2|s3
+zookeeper|s1|s2|s3
+mysql|s1|s2|
+manager|s1||
+node|s1|s2|
+# Otter安装及配置
 ### 1、mysql安装
 
 ```
@@ -162,6 +162,7 @@ ubuntu@s1:~/apps/manager/logs$ cat manager.log
 ```
 
 http://192.168.64.128:8080/login.htm
+
 admin/admin
 
 ### 12、停止otter manager
@@ -183,6 +184,7 @@ ubuntu@s2:~/apps$ sudo apt-get install build-essential
 ### 14、安装aria2
 
 http://sourceforge.net/projects/aria2/files/stable/
+
 http://nchc.dl.sourceforge.net/project/aria2/stable/aria2-1.19.0/aria2-1.19.0.tar.gz
 
 ```
