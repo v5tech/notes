@@ -138,3 +138,12 @@ source $ZSH/custom/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+
+alias vi="vim"
+alias ip="curl icanhazip.com"
+alias tq="curl 'wttr.in/西安?lang=zh'"
+alias docker-clean-unused='docker system prune --all --force --volumes'
+alias docker-clean-all='docker stop $(docker container ls -a -q) && docker system prune --all --force --volumes'
+alias docker-clean-containers='docker container stop $(docker container ls -a -q) && docker container rm $(docker container ls -a -q)'
+
+archey
