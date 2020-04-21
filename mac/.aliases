@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 
 alias vi="vim"
+alias cls="clear"
+alias dir='ls -lah'
 alias sudo='sudo '
 alias week='date +%V'
 alias tq="curl 'wttr.in/西安?lang=zh'"
@@ -44,6 +46,4 @@ dbash() { docker exec -it $(docker ps -aqf "name=$1") bash; }
 alias docker-clean-unused='docker system prune --all --force --volumes'
 alias docker-clean-all='docker stop $(docker container ls -a -q) && docker system prune --all --force --volumes'
 alias docker-clean-containers='docker container stop $(docker container ls -a -q) && docker container rm $(docker container ls -a -q)'
-
-archey
 
