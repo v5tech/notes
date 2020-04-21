@@ -9,7 +9,7 @@ alias week='date +%V'
 alias tq="curl 'wttr.in/西安?lang=zh'"
 alias reload="exec ${SHELL} -l"
 alias path='echo -e ${PATH//:/\\n}'
-alias update='brew update; brew upgrade; brew cleanup; npm install npm -g; npm update -g; sudo gem update --system; sudo gem update; sudo gem cleanup'
+alias update='brew update; brew upgrade; brew cleanup; npm install npm -g; npm update -g; sudo gem update --system; sudo gem update -n /usr/local/bin --system; sudo gem cleanup'
 
 alias ..="cd .."
 alias ...="cd ../.."
