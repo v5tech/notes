@@ -9,7 +9,7 @@ alias week='date +%V'
 alias tq="curl 'wttr.in/西安?lang=zh'"
 alias reload="exec ${SHELL} -l"
 alias path='echo -e ${PATH//:/\\n}'
-alias update='sudo softwareupdate -i -a; brew update; brew upgrade; brew cleanup; npm install npm -g; npm update -g; sudo gem update --system; sudo gem update; sudo gem cleanup'
+alias update='brew update; brew upgrade; brew cleanup; npm install npm -g; npm update -g; sudo gem update --system; sudo gem update; sudo gem cleanup'
 
 alias ..="cd .."
 alias ...="cd ../.."
@@ -27,7 +27,6 @@ alias localip="ipconfig getifaddr en0"
 alias ifactive="ifconfig | pcregrep -M -o '^[^\t:]+:([^\n]|\n\t)*status: active'"
 
 alias cleanup="find . -type f -name '*.DS_Store' -ls -delete"
-alias emptytrash="sudo rm -rfv /Volumes/*/.Trashes; sudo rm -rfv ~/.Trash; sudo rm -rfv /private/var/log/asl/*.asl; sqlite3 ~/Library/Preferences/com.apple.LaunchServices.QuarantineEventsV* 'delete from LSQuarantineEvent'"
 
 alias dl="docker ps -l -q"
 alias dps="docker ps"
