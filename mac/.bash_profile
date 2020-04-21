@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 export MAVEN_OPTS="-Xms256m -Xmx512m"
 export M2_HOME=~/develop/maven
 
@@ -5,23 +7,37 @@ export GOROOT=~/develop/go
 export GOBIN=$GOROOT/bin
 export GOPATH=~/develop/gowork
 export GO111MODULE=on
-export GOPROXY=https://goproxy.io
+export GOPROXY=https://goproxy.cn,direct
 
 export PUB_HOSTED_URL=https://pub.flutter-io.cn
 export FLUTTER_STORAGE_BASE_URL=https://storage.flutter-io.cn
 export FLUTTER_HOME=~/develop/flutter
 
 export ANDROID_HOME=~/develop/Android/sdk
-export GRADLE_HOME=~/.gradle/wrapper/dists/gradle-4.10.2-all/9fahxiiecdb76a5g3aw9oi8rv/gradle-4.10.2
+export GRADLE_HOME=~/.gradle/wrapper/dists/gradle-5.6.4-all/ankdp27end7byghfw1q2sw75f/gradle-5.6.4
 
 export NODE_HOME=~/develop/node
 
-export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.tuna.tsinghua.edu.cn/homebrew-bottles
+export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.aliyun.com/homebrew/homebrew-bottles
 
-export PATH=$GRADLE_HOME/bin:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools:$FLUTTER_HOME/bin:$M2_HOME/bin:$GOBIN:$GOPATH/bin:$NODE_HOME/bin:$PATH
+export REDIS_HOME=~/develop/redis
+
+export PATH=$REDIS_HOME:$GRADLE_HOME/bin:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools:$FLUTTER_HOME/bin:$M2_HOME/bin:$GOBIN:$GOPATH/bin:$NODE_HOME/bin:$PATH
 
 http='http://127.0.0.1:1087'
 socks5='socks5://127.0.0.1:1086'
+
+function redis-start
+{
+    $REDIS_HOME/redis-server $REDIS_HOME/redis.conf
+    echo "redis server started on 6379"
+}
+
+function redis-stop
+{
+    ps -ef | grep redis | grep -v 'grep' | awk '{print $2}' | xargs kill -9
+    echo "redis server stoped"
+}
 
 function noproxy
 {
