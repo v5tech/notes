@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 alias vi="vim"
+alias rm="trash"
 alias cls="clear"
 alias dir='ls -lah'
 alias ll='ls -lah'
