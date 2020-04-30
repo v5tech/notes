@@ -90,7 +90,6 @@ plugins=(
  go
  golang
  helm
- history
  node
  npm
  thefuck
@@ -141,6 +140,7 @@ source $ZSH/custom/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 [ -f ~/.aliases ] && source ~/.aliases
+[ -f ~/.docker_aliases ] && source ~/.docker_aliases
 [ -f ~/.kubectl_aliases ] && source ~/.kubectl_aliases
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.

@@ -1,17 +1,5 @@
 #!/usr/bin/env bash
 
-alias vi="vim"
-alias rm="trash"
-alias cls="clear"
-alias dir='ls -lah'
-alias ll='ls -lah'
-alias sudo='sudo '
-alias week='date +%V'
-alias tq="curl 'wttr.in/西安?lang=zh'"
-alias reload="exec ${SHELL} -l"
-alias path='echo -e ${PATH//:/\\n}'
-alias update='brew update; brew upgrade; brew cleanup; npm install npm -g; npm update -g; sudo gem update --system; sudo gem update -n /usr/local/bin --system; sudo gem cleanup'
-
 alias ..="cd .."
 alias ...="cd ../.."
 alias ....="cd ../../.."
@@ -19,9 +7,57 @@ alias .....="cd ../../../.."
 alias ~="cd ~"
 alias -- -="cd -"
 
+alias ls='lsd'
+alias l='ls -l'
+alias la='ls -a'
+alias lla='ls -la'
+alias lt='ls --tree'
+alias ll='ls -lah'
+alias dir='ls -lah'
+
+alias tree='tree -A -N'
+alias treed='tree -d -N'
+alias tree1='tree -d -N -L 1'
+alias tree2='tree -d -N -L 2'
+
 alias d="cd ~/develop"
-alias dl="cd ~/Downloads"
-alias dt="cd ~/Desktop"
+alias cdl="cd ~/Downloads"
+alias cdt="cd ~/Desktop"
+
+alias vi='vim'
+alias zshconfig='vim ~/.zshrc'
+
+alias sudo='sudo '
+alias reload="exec ${SHELL} -l"
+alias path='echo -e ${PATH//:/\\n}'
+
+alias mv='mv -iv'
+alias rm='trash'
+alias cp='cp -iv'
+alias ln='ln -i'
+
+alias c='clear'
+alias cls='clear'
+
+alias hc='history -c'
+alias histg='history | grep'
+
+alias df='df -h'
+alias free='free -m'
+alias ports='sudo lsof -i | grep LISTEN'
+alias cpu='top -R -F -s 1 -o cpu'
+alias mem='top -R -F -s 1 -o rsize'
+
+alias ni='npm install'
+alias nr='npm run'
+alias pip='pip3'
+
+alias brewc='brew cleanup'
+alias brewu='brew update; brew upgrade; brew prune; brew cleanup; brew doctor'
+alias update='brew update; brew upgrade; brew cleanup; npm install npm -g; npm update -g; sudo gem update --system; sudo gem update -n /usr/local/bin --system; sudo gem cleanup'
+
+alias week='date +%V'
+alias tq="curl 'wttr.in/西安?lang=zh'"
 
 alias ip="curl icanhazip.com"
 alias localip="ipconfig getifaddr en0"
@@ -29,23 +65,15 @@ alias ifactive="ifconfig | pcregrep -M -o '^[^\t:]+:([^\n]|\n\t)*status: active'
 
 alias cleanup="find . -type f -name '*.DS_Store' -ls -delete"
 
-alias dl="docker ps -l -q"
-alias dps="docker ps"
-alias dpa="docker ps -a"
-alias di="docker images"
-alias dip="docker inspect --format '{{ .NetworkSettings.IPAddress }}'"
-alias dkd="docker run -d -P"
-alias dki="docker run -i -t -P"
-alias dex="docker exec -i -t"
-dstop() { docker stop $(docker ps -a -q); }
-drm() { docker rm $(docker ps -a -q); }
-alias drmf='docker stop $(docker ps -a -q) && docker rm $(docker ps -a -q)'
-dri() { docker rmi $(docker images -q); }
-dbu() { docker build -t=$1 .; }
-dalias() { alias | grep 'docker' | sed "s/^\([^=]*\)=\(.*\)/\1 => \2/"| sed "s/['|\']//g" | sort; }
-dbash() { docker exec -it $(docker ps -aqf "name=$1") bash; }
-alias docker-clean-unused='docker system prune --all --force --volumes'
-alias docker-clean-all='docker stop $(docker container ls -a -q) && docker system prune --all --force --volumes'
-alias docker-clean-containers='docker container stop $(docker container ls -a -q) && docker container rm $(docker container ls -a -q)'
+psx() { ps -ax | grep -v grep | grep "$@"; }
 
+mk() {
+  mkdir -p "$@" && cd "$@"
+}
 
+transfer() {
+    tmpfile=$( mktemp -t transferXXX )
+    curl --progress-bar --upload-file $1 https://transfer.sh/$(basename $1) >> $tmpfile;
+    cat $tmpfile;
+    rm -f $tmpfile;
+}
