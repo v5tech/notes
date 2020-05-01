@@ -1,106 +1,66 @@
 #!/usr/bin/env bash
 
-# Docker aliases (shortcuts) and function
+alias doc_v="docker -v"
 
-# General
-alias dv="docker -v"
-alias dl="docker login --username=aimeizi"
+alias doc_login="docker login --username=aimeizi"
 
-# List all containers by status using custom format
-alias dpsa='docker ps -a --format "table {{.Names}}\t{{.Image}}\t{{.Status}}"'
+alias doc_ps="docker ps"
 
-# Removes a container, it requires the container name \ ID as parameter
-alias drm='docker rm -f'
+alias doc_psa='docker ps -a --format "table {{.Names}}\t{{.Image}}\t{{.Status}}"'
 
-# Removes an image, it requires the image name \ ID as parameter
-alias drmi='docker rmi'
+alias doc_images="docker images"
 
-# Lists all images by repository sorted by tag name
-alias dimg='docker image ls --format "table {{.Repository}}\t{{.Tag}}\t{{.ID}}" | sort'
+alias doc_images_format='docker images -a --format "table {{.Repository}}\t{{.Tag}}\t{{.ID}}" | sort'
 
-# Diplays a container log, it requires the image name \ ID as parameter
-alias dlgs='docker logs'
+alias doc_logs='docker logs'
 
-# Streams a container log, it requires the image name \ ID as parameter
-alias dlgsf='docker logs -f'
+alias doc_logs_f='docker logs -f'
 
-# Initiates a session withing a container, it requires the image name \ ID as parameter followed by the word "bash"
-alias dterm='docker exec -it'
+alias doc_exec='docker exec -i -t'
 
-# Starts a container, it requires the image name \ ID as parameter
-alias dstrt='docker start'
+alias doc_ip="docker inspect --format '{{ .NetworkSettings.IPAddress }}'"
 
-# Stops a container, it requires the image name \ ID as parameter
-alias dstp='docker stop'
+alias doc_run_d="docker run -d -P"
 
-# Get latest container ID
-alias dl="docker ps -l -q"
+alias doc_run_it="docker run -i -t -P"
 
-# Get container process
-alias dps="docker ps"
+alias doc_start='docker start'
 
-# Get process included stop container
-alias dpa="docker ps -a"
+alias doc_stop='docker stop'
 
-# Get images
-alias di="docker images"
-
-# Get container IP
-alias dip="docker inspect --format '{{ .NetworkSettings.IPAddress }}'"
-
-# Run deamonized container, e.g., $dkd base /bin/echo hello
-alias dkd="docker run -d -P"
-
-# Run interactive container, e.g., $dki base /bin/bash
-alias dki="docker run -i -t -P"
-
-# Execute interactive container, e.g., $dex base /bin/bash
-alias dex="docker exec -i -t"
+alias doc_stop_rm_all='docker stop $(docker ps -a -q) && docker rm $(docker ps -a -q)'
 
 # Networks
-alias dnetl="docker network ls"
-alias dneti="docker network inspect"
-alias dnetrm="docker network rm"
-alias dnetp="docker network prune -f"
+alias doc_net_ls="docker network ls"
+alias doc_net_inspect="docker network inspect"
+alias doc_net_rm="docker network rm"
+alias doc_net_prune="docker network prune -f"
 
 # Volumes
-alias dvc="docker volume create"
-alias dvl="docker volume ls"
-alias dvrm="docker volume rm"
-alias dvp="docker volume prune -f"
-alias dvi="docker volume inspect"
+alias doc_volume_create="docker volume create"
+alias doc_volume_ls="docker volume ls"
+alias doc_volume_rm="docker volume rm"
+alias doc_volume_prune="docker volume prune -f"
+alias doc_volume_inspect="docker volume inspect"
 
 # Docker-Compose
-alias dcv="docker-compose -v"
-alias dcu="docker-compose up"
-alias dcd="docker-compose down"
-alias dcb="docker-compose build --no-cache"
-alias dcc="docker-compose config"
-alias dcdu="docker-compose down && docker-compose up"
+alias doc_compose_v="docker-compose -v"
+alias doc_compose_up="docker-compose up"
+alias doc_compose_down="docker-compose down"
+alias doc_compose_build="docker-compose build --no-cache"
+alias doc_compose_config="docker-compose config"
+alias doc_compose_down_up="docker-compose down && docker-compose up"
 
-alias docker-clean-unused='docker system prune --all --force --volumes'
+alias doc_clean_unused='docker system prune --all --force --volumes'
 
-alias docker-clean-all='docker stop $(docker container ls -a -q) && docker system prune --all --force --volumes'
+alias doc_clean_all='docker stop $(docker container ls -a -q) && docker system prune --all --force --volumes'
 
-alias docker-clean-containers='docker container stop $(docker container ls -a -q) && docker container rm $(docker container ls -a -q)'
+alias doc_clean_containers='docker container stop $(docker container ls -a -q) && docker container rm $(docker container ls -a -q)'
 
-# Stop all containers
-dstop() { docker stop $(docker ps -a -q); }
+doc_build() { docker build -t=$1 .; }
 
-# Remove all containers
-drm() { docker rm $(docker ps -a -q); }
+doc_bash() { docker exec -i -t $(docker ps -aqf "name=$1") bash; }
 
-# Stop and Remove all containers
-alias drmf='docker stop $(docker ps -a -q) && docker rm $(docker ps -a -q)'
+doc_stop_all() { docker stop $(docker ps -a -q); }
 
-# Remove all images
-dri() { docker rmi $(docker images -q); }
-
-# Dockerfile build, e.g., $dbu tcnksm/test 
-dbu() { docker build -t=$1 .; }
-
-# Show all alias related docker
-dalias() { alias | grep 'docker' | sed "s/^\([^=]*\)=\(.*\)/\1 => \2/"| sed "s/['|\']//g" | sort; }
-
-# Bash into running container
-dbash() { docker exec -it $(docker ps -aqf "name=$1") bash; }
+doc_rmi_all() { docker rmi $(docker images -q); }

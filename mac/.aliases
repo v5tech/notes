@@ -21,8 +21,8 @@ alias tree1='tree -d -N -L 1'
 alias tree2='tree -d -N -L 2'
 
 alias d="cd ~/develop"
-alias cdl="cd ~/Downloads"
-alias cdt="cd ~/Desktop"
+alias downloads="cd ~/Downloads"
+alias desktop="cd ~/Desktop"
 
 alias vi='vim'
 alias zshconfig='vim ~/.zshrc'
@@ -40,11 +40,11 @@ alias c='clear'
 alias cls='clear'
 
 alias hc='history -c'
-alias histg='history | grep'
+alias hgrep='history | grep'
 
 alias df='df -h'
 alias free='free -m'
-alias ports='sudo lsof -i | grep LISTEN'
+alias lsof='sudo lsof -i | grep LISTEN'
 alias cpu='top -R -F -s 1 -o cpu'
 alias mem='top -R -F -s 1 -o rsize'
 

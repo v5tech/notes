@@ -18,13 +18,13 @@ export GRADLE_HOME=~/.gradle/wrapper/dists/gradle-5.6.4-all/ankdp27end7byghfw1q2
 
 export NODE_HOME=~/develop/node
 
-export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.aliyun.com/homebrew/homebrew-bottles
+export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.ustc.edu.cn/homebrew-bottles
 
 export REDIS_HOME=~/develop/redis
 
 export PATH=$REDIS_HOME:$GRADLE_HOME/bin:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools:$FLUTTER_HOME/bin:$M2_HOME/bin:$GOBIN:$GOPATH/bin:$NODE_HOME/bin:$PATH
 
-export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
+export PATH=~/.krew/bin:~/.local/bin:$PATH
 
 http='http://127.0.0.1:1087'
 socks5='socks5://127.0.0.1:1086'
