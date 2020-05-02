@@ -25,6 +25,8 @@ alias downloads="cd ~/Downloads"
 alias desktop="cd ~/Desktop"
 
 alias vi='vim'
+alias cat='bat'
+alias preview="fzf --preview 'bat --color \"always\" {}'"
 alias zshconfig='vim ~/.zshrc'
 
 alias sudo='sudo '
@@ -41,12 +43,13 @@ alias cls='clear'
 
 alias hc='history -c'
 alias hgrep='history | grep'
+alias help='tldr'
 
 alias df='df -h'
+alias du='ncdu --color dark -rr -x'
 alias free='free -m'
 alias lsof='sudo lsof -i | grep LISTEN'
-alias cpu='top -R -F -s 1 -o cpu'
-alias mem='top -R -F -s 1 -o rsize'
+alias top='htop'
 
 alias ni='npm install'
 alias nr='npm run'
@@ -60,6 +63,7 @@ alias week='date +%V'
 alias tq="curl 'wttr.in/西安?lang=zh'"
 
 alias ip="curl icanhazip.com"
+alias ping='prettyping --nolegend'
 alias localip="ipconfig getifaddr en0"
 alias ifactive="ifconfig | pcregrep -M -o '^[^\t:]+:([^\n]|\n\t)*status: active'"
 
