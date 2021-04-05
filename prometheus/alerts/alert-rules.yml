@@ -1,0 +1,118 @@
+groups:
+- name: monitor_base
+  rules:
+  - alert: CpuUsageAlert_waring
+    expr: sum(avg(irate(node_cpu_seconds_total{mode!='idle'}[5m])) without (cpu)) by (instance) > 0.60
+    for: 2m
+    labels:
+      level: warning
+    annotations:
+      summary: "Instance {{ $labels.instance }} CPU usage high"
+      description: "{{ $labels.instance }} CPU usage above 60% (current value: {{ $value }})"
+  - alert: CpuUsageAlert_serious
+    #expr: sum(avg(irate(node_cpu_seconds_total{mode!='idle'}[5m])) without (cpu)) by (instance) > 0.85
+    expr: (100 - (avg by (instance) (irate(node_cpu_seconds_total{job=~".*",mode="idle"}[5m])) * 100)) > 85
+    for: 3m
+    labels:
+      level: serious
+    annotations:
+      summary: "Instance {{ $labels.instance }} CPU usage high"
+      description: "{{ $labels.instance }} CPU usage above 85% (current value: {{ $value }})"
+  - alert: MemUsageAlert_waring
+    expr: avg by(instance) ((1 - (node_memory_MemFree_bytes + node_memory_Buffers_bytes + node_memory_Cached_bytes) / node_memory_MemTotal_bytes) * 100) > 70
+    for: 2m
+    labels:
+      level: warning
+    annotations:
+      summary: "Instance {{ $labels.instance }} MEM usage high"
+      description: "{{$labels.instance}}: MEM usage is above 70% (current value is: {{ $value }})"
+  - alert: MemUsageAlert_serious
+    expr: (node_memory_MemTotal_bytes - node_memory_MemAvailable_bytes)/node_memory_MemTotal_bytes > 0.90
+    for: 3m
+    labels:
+      level: serious
+    annotations:
+      summary: "Instance {{ $labels.instance }} MEM usage high"
+      description: "{{ $labels.instance }} MEM usage above 90% (current value: {{ $value }})"
+  - alert: DiskUsageAlert_warning
+    expr: (1 - node_filesystem_free_bytes{fstype!="rootfs",mountpoint!="",mountpoint!~"/(run|var|sys|dev).*"} / node_filesystem_size_bytes) * 100 > 80
+    for: 2m
+    labels:
+      level: warning
+    annotations:
+      summary: "Instance {{ $labels.instance }} Disk usage high"
+      description: "{{$labels.instance}}: Disk usage is above 80% (current value is: {{ $value }})"
+  - alert: DiskUsageAlert_serious
+    expr: (1 - node_filesystem_free_bytes{fstype!="rootfs",mountpoint!="",mountpoint!~"/(run|var|sys|dev).*"} / node_filesystem_size_bytes) * 100 > 90
+    for: 3m
+    labels:
+      level: serious
+    annotations:
+      summary: "Instance {{ $labels.instance }} Disk usage high"
+      description: "{{$labels.instance}}: Disk usage is above 90% (current value is: {{ $value }})"
+  - alert: NodeFileDescriptorUsage
+    expr: avg by (instance) (node_filefd_allocated{} / node_filefd_maximum{}) * 100 > 60
+    for: 2m
+    labels:
+      level: warning
+    annotations:
+      summary: "Instance {{ $labels.instance }} File Descriptor usage high"
+      description: "{{$labels.instance}}: File Descriptor usage is above 60% (current value is: {{ $value }})"
+  - alert: NodeLoad15
+    expr: avg by (instance) (node_load15{}) > 80
+    for: 2m
+    labels:
+      level: warning
+    annotations:
+      summary: "Instance {{ $labels.instance }} Load15 usage high"
+      description: "{{$labels.instance}}: Load15 is above 80 (current value is: {{ $value }})"
+  - alert: NodeAgentStatus
+    expr: avg by (instance) (up{}) == 0
+    for: 2m
+    labels:
+      level: warning
+    annotations:
+      summary: "{{$labels.instance}}: has been down"
+      description: "{{$labels.instance}}: Node_Exporter Agent is down (current value is: {{ $value }})"
+  - alert: NodeProcsBlocked
+    expr: avg by (instance) (node_procs_blocked{}) > 10
+    for: 2m
+    labels:
+      level: warning
+    annotations:
+      summary: "Instance {{ $labels.instance }}  Process Blocked usage high"
+      description: "{{$labels.instance}}: Node Blocked Procs detected! above 10 (current value is: {{ $value }})"
+  - alert: NetworkTransmitRate
+    #expr:  avg by (instance) (floor(irate(node_network_transmit_bytes_total{device="ens192"}[2m]) / 1024 / 1024)) > 50
+    expr:  avg by (instance) (floor(irate(node_network_transmit_bytes_total{}[2m]) / 1024 / 1024 * 8 )) > 40
+    for: 1m
+    labels:
+      level: warning
+    annotations:
+      summary: "Instance {{ $labels.instance }} Network Transmit Rate usage high"
+      description: "{{$labels.instance}}: Node Transmit Rate (Upload) is above 40Mbps/s (current value is: {{ $value }}Mbps/s)"
+  - alert: NetworkReceiveRate
+    #expr:  avg by (instance) (floor(irate(node_network_receive_bytes_total{device="ens192"}[2m]) / 1024 / 1024)) > 50
+    expr:  avg by (instance) (floor(irate(node_network_receive_bytes_total{}[2m]) / 1024 / 1024 * 8 )) > 40
+    for: 1m
+    labels:
+      level: warning
+    annotations:
+      summary: "Instance {{ $labels.instance }} Network Receive Rate usage high"
+      description: "{{$labels.instance}}: Node Receive Rate (Download) is above 40Mbps/s (current value is: {{ $value }}Mbps/s)"
+  - alert: DiskReadRate
+    expr: avg by (instance) (floor(irate(node_disk_read_bytes_total{}[2m]) / 1024 )) > 200
+    for: 2m
+    labels:
+      level: warning
+    annotations:
+      summary: "Instance {{ $labels.instance }} Disk Read Rate usage high"
+      description: "{{$labels.instance}}: Node Disk Read Rate is above 200KB/s (current value is: {{ $value }}KB/s)"
+  - alert: DiskWriteRate
+    expr: avg by (instance) (floor(irate(node_disk_written_bytes_total{}[2m]) / 1024 / 1024 )) > 20
+    for: 2m
+    labels:
+      level: warning
+    annotations:
+      summary: "Instance {{ $labels.instance }} Disk Write Rate usage high"
+      description: "{{$labels.instance}}: Node Disk Write Rate is above 20MB/s (current value is: {{ $value }}MB/s)"

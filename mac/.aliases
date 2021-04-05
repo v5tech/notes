@@ -1,0 +1,98 @@
+#!/usr/bin/env bash
+
+alias ..="cd .."
+alias ...="cd ../.."
+alias ....="cd ../../.."
+alias .....="cd ../../../.."
+alias ~="cd ~"
+alias -- -="cd -"
+
+alias ls='lsd'
+alias l='ls -l'
+alias la='ls -a'
+alias lla='ls -la'
+alias lt='ls --tree'
+alias ll='ls -lah'
+alias dir='ls -lah'
+
+alias tree='tree -A -N'
+alias treed='tree -d -N'
+alias tree1='tree -d -N -L 1'
+alias tree2='tree -d -N -L 2'
+
+alias d="cd ~/develop"
+alias downloads="cd ~/Downloads"
+alias desktop="cd ~/Desktop"
+
+alias vi='vim'
+alias cat='bat'
+alias preview="fzf --preview 'bat --color \"always\" {}'"
+alias zshconfig='vim ~/.zshrc'
+
+alias sudo='sudo '
+alias reload="exec ${SHELL} -l"
+alias path='echo -e ${PATH//:/\\n}'
+
+alias mv='mv -iv'
+alias rm='trash'
+alias cp='cp -iv'
+alias ln='ln -i'
+
+alias c='clear'
+alias cls='clear'
+
+alias hc='history -c'
+alias hgrep='history | grep'
+alias help='tldr'
+
+alias df='df -h'
+alias du='ncdu --color dark -rr -x'
+alias free='free -m'
+alias lsof='sudo lsof -i | grep LISTEN'
+alias top='htop'
+
+alias ni='npm install'
+alias nr='npm run'
+alias pip='pip3'
+
+alias brewc='brew cleanup --prune=all'
+alias brewu='brew update; brew upgrade; brew cleanup --prune=all; brew doctor'
+alias update='brew update; brew upgrade; brew cleanup --prune=all; npm install npm -g; npm update -g; sudo gem update --system; sudo gem update -n /usr/local/bin --system; sudo gem cleanup'
+
+alias week='date +%V'
+alias tq="curl 'wttr.in/西安?lang=zh'"
+
+alias ip="curl icanhazip.com"
+alias localip="ipconfig getifaddr en0"
+alias ifactive="ifconfig | pcregrep -M -o '^[^\t:]+:([^\n]|\n\t)*status: active'"
+
+alias cleanup="find . -type f -name '*.DS_Store' -ls -delete"
+
+psx() { ps -ax | grep -v grep | grep "$@"; }
+
+mk() {
+  mkdir -p "$@" && cd "$@"
+}
+
+mclean() {
+  mvn clean -U
+}
+
+m2clean() {
+  find ~/.m2/repository -type f -name '*.lastUpdated' -ls -delete
+  find ~/.m2/repository -type f -name "unknown" -ls -delete
+  find ~/.m2/repository -type f -name "error" -ls -delete
+  find ~/.m2/repository -type f -name "*.BUILD-SNAPSHOT" -ls -delete
+  find ~/.m2/repository -type f -name "*BUILD*" -ls -delete
+  find ~/.m2/repository -type f -name "*SNAPSHOT*" -ls -delete
+  find ~/.m2/repository -type f -name "*RC*" -ls -delete
+  find ~/.m2/repository -type f -name "*M*" -ls -delete
+  find ~/.m2/repository -type d -empty -ls -delete
+}
+
+transfer() {
+    tmpfile=$( mktemp -t transferXXX )
+    curl --progress-bar --upload-file $1 https://transfer.sh/$(basename $1) >> $tmpfile;
+    cat $tmpfile;
+    rm -f $tmpfile;
+}

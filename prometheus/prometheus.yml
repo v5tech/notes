@@ -1,0 +1,71 @@
+# my global config
+global:
+  scrape_interval:     15s # Set the scrape interval to every 15 seconds. Default is every 1 minute.
+  evaluation_interval: 15s # Evaluate rules every 15 seconds. The default is every 1 minute.
+  # scrape_timeout is set to the global default (10s).
+
+# remote_write:
+#   - url: "http://promscale-connector:9201/write"
+
+# remote_read:
+#   - url: "http://promscale-connector:9201/read"
+
+remote_write:
+  - url: "http://influxdb:8086/api/v1/prom/write?db=prometheus&u=influxdb&p=influxdb"
+
+remote_read:
+  - url: "http://influxdb:8086/api/v1/prom/read?db=prometheus&u=influxdb&p=influxdb"
+
+# Alertmanager configuration
+alerting:
+  alertmanagers:
+  - static_configs:
+    - targets:
+      - alertmanager:9093
+
+# Load rules once and periodically evaluate them according to the global 'evaluation_interval'.
+rule_files:
+  # - "first_rules.yml"
+  # - "second_rules.yml"
+  - "alerts/*.yml"
+
+# A scrape configuration containing exactly one endpoint to scrape:
+# Here it's Prometheus itself.
+scrape_configs:
+  # The job name is added as a label `job=<job_name>` to any timeseries scraped from this config.
+  - job_name: 'prometheus'
+
+    # metrics_path defaults to '/metrics'
+    # scheme defaults to 'http'.
+
+    static_configs:
+    - targets: ['prometheus:9090']
+
+  # - job_name: 'node1'
+  #   static_configs:
+  #   - targets: ['172.24.107.47:9100']
+  #     labels:
+  #       instance: 'node1'
+
+  # - job_name: 'node2'
+  #   static_configs:
+  #   - targets: ['192.168.223.2:9100']
+  #     labels:
+  #       instance: 'node2'
+
+  - job_name: 'file_ds'
+    file_sd_configs:
+    - files:
+      - 'targets.json'
+      refresh_interval: 1m
+
+  - job_name: 'consul-sd'
+    consul_sd_configs:
+    - server: '172.24.107.38:8500'
+      services: []
+    relabel_configs:
+      - source_labels: [__meta_consul_tags]
+        regex: .*node.*
+        action: keep
+      - regex: __meta_consul_service_metadata_(.+)
+        action: labelmap

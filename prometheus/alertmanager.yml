@@ -1,0 +1,37 @@
+global:
+  resolve_timeout: 5m
+  smtp_smarthost: 'smtp.exmail.qq.com:465'
+  smtp_from: 'fengj@anchnet.com'
+  smtp_auth_username: 'fengj@anchnet.com'
+  smtp_auth_password: '********'
+  smtp_require_tls: false
+
+templates:
+  - '/etc/alertmanager/templates/*.tmpl'
+
+route:
+  group_by: ['alertname']
+  group_wait: 10s
+  group_interval: 10s
+  repeat_interval: 30m
+  receiver: 'web.hook'
+
+receivers:
+
+- name: 'mail-receiver'
+  email_configs:
+    - to: 'fengj@anchnet.com'
+      html: '{{ template "email.to.html" . }}'
+      headers: { Subject: "Prometheus 告警邮件" }
+      send_resolved: true
+
+- name: 'web.hook'
+  webhook_configs:
+  - url: 'http://172.24.107.44:5001/'
+
+inhibit_rules:
+  - source_match:
+      severity: 'critical'
+    target_match:
+      severity: 'warning'
+    equal: ['alertname', 'dev', 'instance']

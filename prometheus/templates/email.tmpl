@@ -1,0 +1,29 @@
+{{ define "email.to.html" }}
+{{- if gt (len .Alerts.Firing) 0 -}}
+{{ range .Alerts }}
+=========start==========<br>
+告警程序: prometheus_alert <br>
+告警级别: {{ .Labels.severity }} <br>
+告警类型: {{ .Labels.alertname }} <br>
+告警主机: {{ .Labels.instance }} <br>
+告警主题: {{ .Annotations.summary }}  <br>
+告警详情: {{ .Annotations.description }} <br>
+触发时间: {{ .StartsAt.Format "2006-01-02 15:04:05" }} <br>
+=========end==========<br>
+{{ end }}{{ end -}}
+ 
+{{- if gt (len .Alerts.Resolved) 0 -}}
+{{ range .Alerts }}
+=========start==========<br>
+告警程序: prometheus_alert <br>
+告警级别: {{ .Labels.severity }} <br>
+告警类型: {{ .Labels.alertname }} <br>
+告警主机: {{ .Labels.instance }} <br>
+告警主题: {{ .Annotations.summary }} <br>
+告警详情: {{ .Annotations.description }} <br>
+触发时间: {{ .StartsAt.Format "2006-01-02 15:04:05" }} <br>
+恢复时间: {{ .EndsAt.Format "2006-01-02 15:04:05" }} <br>
+=========end==========<br>
+{{ end }}{{ end -}}
+ 
+{{- end }}

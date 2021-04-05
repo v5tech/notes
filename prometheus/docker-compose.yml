@@ -1,0 +1,84 @@
+version: '3'
+
+services:
+
+  influxdb:
+    image: influxdb:1.8.4
+    container_name: influxdb
+    ports:
+      - "8086:8086"
+    environment:
+      - INFLUXDB_DB=prometheus
+      - INFLUXDB_ADMIN_ENABLED=true
+      - INFLUXDB_ADMIN_USER=admin
+      - INFLUXDB_ADMIN_PASSWORD=admin
+      - INFLUXDB_USER=influxdb
+      - INFLUXDB_USER_PASSWORD=influxdb
+
+  chronograf:
+    image: chronograf:1.8.8
+    container_name: chronograf
+    ports:
+      - "8888:8888"
+    environment:
+      - INFLUXDB-URL=http://influxdb:8086
+
+  db:
+    image: timescaledev/promscale-extension:latest-pg12
+    container_name: db
+    ports:
+      - 5432:5432/tcp
+    environment:
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_DB: timescale
+
+  prometheus:
+    image: prom/prometheus:v2.24.1
+    container_name: prometheus
+    entrypoint: ["/bin/prometheus", "--config.file=/etc/prometheus/prometheus.yml", "--web.enable-lifecycle"]
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - ./targets.json:/etc/prometheus/targets.json:ro
+      - ./alerts:/etc/prometheus/alerts:ro
+    ports:
+      - 9090:9090
+    restart: always
+
+  promscale-connector:
+    image: timescale/promscale:latest
+    container_name: promscale-connector
+    ports:
+      - 9201:9201/tcp
+    restart: on-failure
+    depends_on:
+      - db
+      - prometheus
+    environment:
+      PROMSCALE_LOG_LEVEL: debug
+      PROMSCALE_DB_CONNECT_RETRIES: 10
+      PROMSCALE_DB_HOST: db
+      PROMSCALE_DB_PASSWORD: postgres
+      PROMSCALE_WEB_TELEMETRY_PATH: /metrics-text
+      PROMSCALE_DB_SSL_MODE: allow
+
+  alertmanager:
+    image: prom/alertmanager:v0.21.0
+    container_name: alertmanager
+    volumes:
+      - ./alertmanager.yml:/etc/alertmanager/alertmanager.yml:ro
+      - ./templates:/etc/alertmanager/templates:ro
+    ports:
+      - 9093:9093
+    restart: always
+
+  grafana:
+    image: grafana/grafana
+    container_name: grafana
+    ports:
+      - 3000:3000
+    restart: always
+
+networks:
+  default:
+    driver: bridge

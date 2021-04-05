@@ -1,0 +1,44 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: data-kuboard1
+spec:
+  storageClassName: data-kuboard
+  capacity:
+    storage: 5Gi
+  accessModes:
+    - ReadWriteMany
+  hostPath:
+    path: /data-kuboard1
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: data-kuboard2
+spec:
+  storageClassName: data-kuboard
+  capacity:
+    storage: 5Gi
+  accessModes:
+    - ReadWriteMany
+  hostPath:
+    path: /data-kuboard2
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: data-kuboard3
+spec:
+  storageClassName: data-kuboard
+  capacity:
+    storage: 5Gi
+  accessModes:
+    - ReadWriteMany
+  hostPath:
+    path: /data-kuboard3
+---
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: data-kuboard
+provisioner: fuseim.pri/ifs

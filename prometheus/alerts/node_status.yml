@@ -1,0 +1,52 @@
+groups:
+- name: 实例存活告警规则
+  rules:
+  - alert: 实例存活告警
+    expr: up == 0
+    for: 20s
+    labels:
+      user: prometheus
+      severity: Disaster
+    annotations:
+      summary: "Instance {{ $labels.instance }} is down"
+      description: "Instance {{ $labels.instance }} of job {{ $labels.job }} has been down for more than 20s."
+      value: "{{ $value }}"
+
+- name: 内存告警规则
+  rules:
+  - alert: "内存使用率告警"
+    expr: (node_memory_MemTotal_bytes - (node_memory_MemFree_bytes+node_memory_Buffers_bytes+node_memory_Cached_bytes )) / node_memory_MemTotal_bytes * 100 > 75
+    for: 1m
+    labels:
+      user: prometheus
+      severity: warning
+    annotations:
+      summary: "服务器: {{$labels.alertname}} 内存报警"
+      description: "{{ $labels.alertname }} 内存资源利用率大于75%！(当前值: {{ $value }}%)"
+      value: "{{ $value }}"
+
+- name: CPU报警规则
+  rules:
+  - alert: CPU使用率告警
+    expr: 100 - (avg by (instance)(irate(node_cpu_seconds_total{mode="idle"}[1m]) )) * 100 > 70
+    for: 1m
+    labels:
+      user: prometheus
+      severity: warning
+    annotations:
+      summary: "服务器: {{$labels.alertname}} CPU报警"
+      description: "服务器: CPU使用超过70%！(当前值: {{ $value }}%)"
+      value: "{{ $value }}"
+
+- name: 磁盘报警规则
+  rules:
+  - alert: 磁盘使用率告警
+    expr: (node_filesystem_size_bytes - node_filesystem_avail_bytes) / node_filesystem_size_bytes * 100 > 80
+    for: 1m
+    labels:
+      user: prometheus
+      severity: warning
+    annotations:
+      summary: "服务器: {{$labels.alertname}} 磁盘报警"
+      description: "服务器:{{$labels.alertname}},磁盘设备: 使用超过80%！(挂载点: {{ $labels.mountpoint }} 当前值: {{ $value }}%)"
+      value: "{{ $value }}"

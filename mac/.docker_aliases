@@ -1,0 +1,66 @@
+#!/usr/bin/env bash
+
+alias doc_v="docker -v"
+
+alias doc_login="docker login --username=aimeizi"
+
+alias doc_ps="docker ps"
+
+alias doc_psa='docker ps -a --format "table {{.Names}}\t{{.Image}}\t{{.Status}}"'
+
+alias doc_images="docker images"
+
+alias doc_images_format='docker images -a --format "table {{.Repository}}\t{{.Tag}}\t{{.ID}}" | sort'
+
+alias doc_logs='docker logs'
+
+alias doc_logs_f='docker logs -f'
+
+alias doc_exec='docker exec -i -t'
+
+alias doc_ip="docker inspect --format '{{ .NetworkSettings.IPAddress }}'"
+
+alias doc_run_d="docker run -d -P"
+
+alias doc_run_it="docker run -i -t -P"
+
+alias doc_start='docker start'
+
+alias doc_stop='docker stop'
+
+alias doc_stop_rm_all='docker stop $(docker ps -a -q) && docker rm $(docker ps -a -q)'
+
+# Networks
+alias doc_net_ls="docker network ls"
+alias doc_net_inspect="docker network inspect"
+alias doc_net_rm="docker network rm"
+alias doc_net_prune="docker network prune -f"
+
+# Volumes
+alias doc_volume_create="docker volume create"
+alias doc_volume_ls="docker volume ls"
+alias doc_volume_rm="docker volume rm"
+alias doc_volume_prune="docker volume prune -f"
+alias doc_volume_inspect="docker volume inspect"
+
+# Docker-Compose
+alias doc_compose_v="docker-compose -v"
+alias doc_compose_up="docker-compose up"
+alias doc_compose_down="docker-compose down"
+alias doc_compose_build="docker-compose build --no-cache"
+alias doc_compose_config="docker-compose config"
+alias doc_compose_down_up="docker-compose down && docker-compose up"
+
+alias doc_clean_unused='docker system prune --all --force --volumes'
+
+alias doc_clean_all='docker stop $(docker container ls -a -q) && docker system prune --all --force --volumes'
+
+alias doc_clean_containers='docker container stop $(docker container ls -a -q) && docker container rm $(docker container ls -a -q)'
+
+doc_build() { docker build -t=$1 .; }
+
+doc_bash() { docker exec -i -t $(docker ps -aqf "name=$1") bash; }
+
+doc_stop_all() { docker stop $(docker ps -a -q); }
+
+doc_rmi_all() { docker rmi $(docker images -q); }
