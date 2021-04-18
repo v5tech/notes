@@ -92,3 +92,5 @@ config.vbguest.iso_path = "https://mirrors.tuna.tsinghua.edu.cn/virtualbox/%{ver
 ## 小结
 
 本文总结了 Vagrant 可能会用到的国内镜像，通过国内镜像加速，大大提升 Vagrant 使用体验。
+
+https://kiwenlau.com/tags/Vagrant/

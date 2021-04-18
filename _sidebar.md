@@ -32,11 +32,15 @@
   * [kafka集群搭建](flume+kafka+storm架构/kafka集群搭建)
   * [storm集群搭建](flume+kafka+storm架构/storm集群搭建)
 
+* [flutter](flutter/flutter)
+
 * [git](git/git)
 
   * [git-faq](git/git_faq)
   * [git-flight-rules](git/git-flight-rules)
   * [Git原理详解及实用指南](git/Git原理详解及实用指南/Git原理详解及实用指南)
+
+* [go](go/golang)
 
 * [graylog](graylog/graylog)
 
@@ -54,15 +58,12 @@
   * [IntelliJ IDEA For Mac 快捷键](jetbrains/keymap-mac-introduce)
   * [从 Windows 过度到 Mac 必备快捷键对照表](jetbrains/keymap-win-mac)
 
-* [jmx](jmx/jmx)
-
-  * [开启JMX监控](jmx/jmx-quickstart)
-  * [使用jmxtrans-agent监控tomcat](jmx/jmxtrans-agent)
-
 * [kafka](kafka/kafka)
 
   * [Kafka基础命令](kafka/Kafka基础命令)
   * [kafka学习笔记](kafka/kafka学习笔记)
+
+* [kotlin](kotlin/kotlin)
 
 * [kubernetes](kubernetes/kubernetes)
 
