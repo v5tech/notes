@@ -1,7 +1,7 @@
 # Git飞行规则(Flight Rules)
 
 🌍
-*[English](https://github.com/k88hudson/git-flight-rules/blob/master/README.md) ∙ [Español](https://github.com/k88hudson/git-flight-rules/blob/master/README_es.md)  ∙  [Русский](https://github.com/k88hudson/git-flight-rules/blob/master/README_ru.md) ∙ [简体中文](https://github.com/k88hudson/git-flight-rules/blob/master/README_zh-CN.md)∙ [한국어](https://github.com/k88hudson/git-flight-rules/blob/master/README_kr.md)  ∙  [Tiếng Việt](https://github.com/k88hudson/git-flight-rules/blob/master/README_vi.md) ∙ [Français](https://github.com/k88hudson/git-flight-rules/blob/master/README_fr.md) ∙ [日本語](https://github.com/k88hudson/git-flight-rules/blob/master/README_ja.md)*
+*[English](README.md) ∙ [Español](README_es.md)  ∙  [Русский](README_ru.md) ∙ [简体中文](README_zh-CN.md)∙ [한국어](README_kr.md)  ∙  [Tiếng Việt](README_vi.md) ∙ [Français](README_fr.md) ∙ [日本語](README_ja.md)*
 
 #### 前言
 
@@ -740,7 +740,7 @@ Newer, awesomer features
 # You are currently editing a commit while rebasing branch 'main' on '8074d12'.
 #
 # Changes to be committed:
-# modified:   README.md
+#	modified:   README.md
 #
 
 ```
@@ -819,7 +819,7 @@ Changes not staged for commit:
   (use "git add <file>..." to update what will be committed)
   (use "git checkout -- <file>..." to discard changes in working directory)
 
-  modified:   README.md
+	modified:   README.md
 ```
 
 在这个例子里面, `README.md` 有冲突。 打开这个文件找到类似下面的内容:

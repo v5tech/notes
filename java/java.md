@@ -29,5 +29,6 @@
 * [JMH - 大厂是如何使用 JMH 进行 Java 代码性能测试的？必须掌握！](https://www.wdbyte.com/2020/08/develop/tool-jmh/)
 * [JVM 性能调优监控工具](https://juejin.cn/post/6894398706225774606)
 * [JVM性能调优实战：让你的IntelliJ Idea纵享丝滑](https://juejin.cn/post/6918891931162378254)
+* [visualvm工具远程对linux服务器上的JVM虚拟机进行监控与调优](https://www.cnblogs.com/zhujiqian/p/14578878.html)
 * [开启JMX监控](java/jmx/jmx-quickstart)
 * [使用jmxtrans-agent监控tomcat](java/jmx/jmxtrans-agent)

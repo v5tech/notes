@@ -8,6 +8,8 @@
 * [GitHub Actions中文文档](https://docs.github.com/cn/actions)
 * [如何使用 Github Actions 自动抓取每日必应壁纸？](https://www.wdbyte.com/2021/03/bing-wallpaper-github-action/)
 * [猴子都能懂的Git入门](https://backlog.com/git-tutorial/cn/)
+* [git-flight-rules](git/git-flight-rules)
+* [Git使用的奇淫技巧](git/Git使用的奇淫技巧)
 
 ---
 

@@ -15,6 +15,7 @@
 * https://imysql.com/my-cnf-wizard.html
 * https://opensource.actionsky.com/
 * http://mysqlhighavailability.com/
+* https://www.mysqltutorial.org/
 * https://planet.mysql.com/
 * https://planet.mysql.com/zh/
 * http://wubx.net/

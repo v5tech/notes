@@ -11,6 +11,8 @@
   * [搭建Canal v1.1.4 HA集群](canal/build_canal_v1.1.4_ha_cluster)
   * [基于Canal和Kafka实现MySQL的Binlog近实时同步](canal/binlog_sync_for_mysql_based_on_canal_and_kafka)
 
+* [consul](consul/consul)
+
 * [css](css/css)
 
 * [docker](docker/docker)
@@ -37,7 +39,6 @@
 * [git](git/git)
 
   * [git-faq](git/git_faq)
-  * [git-flight-rules](git/git-flight-rules)
   * [Git原理详解及实用指南](git/Git原理详解及实用指南/Git原理详解及实用指南)
 
 * [go](go/golang)
