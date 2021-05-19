@@ -75,6 +75,8 @@
 
 * [linux](linux/linux)
   
+  * [环境搭建之更换软件源汇总(Ubuntu/pip/Anaconda/Docker等)](linux/mirrors)
+  * [Linux Firewall & Port Configuration](linux/firewall_port)
   * [2万字系统总结，带你实现 Linux 命令自由？](linux/2万字系统总结，带你实现Linux命令自由？)
   * [Linux查看硬件信息超强命令sar，以及可视化工具ksar](linux/Linux查看硬件信息超强命令sar，以及可视化工具ksar)
   * [Linux生产环境上，最常用的一套“AWK“技巧](linux/Linux生产环境上，最常用的一套“AWK“技巧)
@@ -111,6 +113,7 @@
   * [万字总结，体系化带你全面认识 Nginx ！](nginx/万字总结体系化带你全面认识Nginx)
   * [解决 Nginx 413 Request Entity Too Large 问题](nginx/nginx_faq)
   * [nginx流量镜像](nginx/nginx_traffic_mirroring)
+  * [基于acme.sh从Let's encrypt生成免费且自动更新的SSL证书](nginx/acme.sh)
   * [通过Nginx、Consul、Upsync实现动态负载均衡和服务平滑发布](nginx/dynamic_load_balancing_nginx_consul_upsync)
 
 * [otter](otter/otter)

@@ -21,7 +21,6 @@
 * [江南一点雨](https://www.javaboy.org)
 * [bugstack虫洞栈](https://bugstack.cn)
 * [crossoverjie](https://crossoverjie.top)
-* [Java技术驿站](http://cmsblogs.com)
 * [Jitwxs](https://www.jitwxs.cn)
 * [超级小豆丁](http://www.mydlq.club)
 
