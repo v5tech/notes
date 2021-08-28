@@ -1267,23 +1267,23 @@ DELETE http://127.0.0.1:9200/news/_mapping/article
 
 ### ansj分词器测试
 
-http://127.0.0.1:9200/news/_analyze?analyzer=ansj_index&text=习近平
+http://127.0.0.1:9200/news/_analyze?analyzer=ansj_index&text=白居易
 
 http://127.0.0.1:9200/news/_analyze?analyzer=ansj_index&text=我是中国人
 
-http://127.0.0.1:9200/news/_analyze?analyzer=ansj_index&text=汪东兴同志遗体在京火化汪东兴同志病重期间和逝世后，习近平李克强张德江俞正声刘云山王岐山张高丽江泽民胡锦涛等同志，前往医院看望或通过各种形式对汪东兴同志逝世表示沉痛哀悼并向其亲属表示深切慰问新华社北京8月27日电中国共产党的优秀党员
+http://127.0.0.1:9200/news/_analyze?analyzer=ansj_index&text=Elasticsearch是一个分布式、RESTful风格的搜索和数据分析引擎，能够解决不断涌现出的各种用例。作为ElasticStack的核心，它集中存储您的数据，帮助您发现意料之中以及意料之外的情况。
 
 ### ansj分词器查询
 
 * 普通查询
 
-http://127.0.0.1:9200/news/_search?q=习近平&analyzer=ansj_index&size=50
+http://127.0.0.1:9200/news/_search?q=白居易&analyzer=ansj_index&size=50
 
 * 指定term查询
 
-http://127.0.0.1:9200/news/_search?q=content:江泽民&analyzer=ansj_index&size=50
+http://127.0.0.1:9200/news/_search?q=content:李世民&analyzer=ansj_index&size=50
 
-http://127.0.0.1:9200/news/_search?q=title:江泽民&analyzer=ansj_index&size=50
+http://127.0.0.1:9200/news/_search?q=title:李世民&analyzer=ansj_index&size=50
 
 http://127.0.0.1:9200/news/_search?q=source:新华网&analyzer=ansj_index&size=50
 
