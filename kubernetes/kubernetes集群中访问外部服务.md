@@ -2,7 +2,7 @@
 
 ## 服务间通讯
 
-集群内部服务之间的通讯。参考官方文档 https://kubernetes.io/zh/docs/concepts/services-networking/dns-pod-service。
+集群内部服务之间的通讯。参考官方文档 https://kubernetes.io/zh/docs/concepts/services-networking/dns-pod-service
 
 默认情况下，k8s 会根据服务名，为每个服务创建一个内部的 FQDN，格式为 `svc-name.namespace-name.svc.cluster.local` 集群内的其他服务可以通过此 FQDN 域名直接访问。
 
