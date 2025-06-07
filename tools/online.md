@@ -81,6 +81,7 @@
 * https://onlinerandomtools.com
 * https://www.csvjson.com
 * https://curl.trillworks.com/
+* https://extendsclass.com/json-schema-validator.html
 
 ## 在线PDF转化
 
@@ -93,6 +94,7 @@
 * https://rubular.com/
 * https://regexper.com/
 * https://regex101.com/
+* https://pythonium.net/regex
 
 ## 时间转化
 
