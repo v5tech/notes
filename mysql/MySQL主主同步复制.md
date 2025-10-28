@@ -49,7 +49,7 @@ binlog-ignore-db	= mysql				#忽略同步的数据库
 log-slave-updates						#把从库的写操作记录到binlog中 （缺少之后，双主创建失败）
 expire_logs_days	= 365				#日志文件过期天数，默认是 0，表示不过期
 auto-increment-increment= 2				#设定为主服务器的数量，防止auto_increment字段重复
-auto-increment-offset	= 1				#自增长字段的初始值，在多台master环境下，不会出现自增长ID重复
+auto-increment-offset	= 2				#自增长字段的初始值，在多台master环境下，不会出现自增长ID重复
 ```
 
 ##### 创建帐号密码并授权
